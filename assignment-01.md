@@ -2,7 +2,7 @@
 
 # CMPS 2200 Assignment 1
 
-**Name:**_________________________
+**Name:**Duke Glenn
 
 
 In this assignment, you will learn more about asymptotic notation, parallelism, functional languages, and algorithmic cost models. As in the recitation, some of your answer will go here and some will go in `main.py`. You are welcome to edit this `assignment-01.md` file directly, or print and fill in by hand. If you do the latter, please scan to a file `assignment-01.pdf` and push to your github repository. 
@@ -13,34 +13,41 @@ In this assignment, you will learn more about asymptotic notation, parallelism, 
 
   - 1a. Is $2^{n+1} \in O(2^n)$? Why or why not? 
 .  
-.  
-.  
+.  No, because $2^{n+1} grows faster than 2^n for large values, so 
+.  $2^{n+1} is not in O(2^n).
 .  
 . 
   - 1b. Is $2^{2^n} \in O(2^n)$? Why or why not?     
 .  
-.  
-.  
-.  
+.  No, because $2^{2^n} grows much faster than $2^n$ for large values
+.  of n. Since $2^{2^n} grows exponentially and $2^n$ grows at a
+.  linear rate, so $2^{2^n} is not in O(2^n)$.
 .  
   - 1c. Is $n^{1.01} \in O(\mathrm{log}^2 n)$?    
 .  
-.  
-.  
-.  
+.  No, because $n^{1.01}$ grows much faster than $\log^2 n$ for
+.  large values of $n$. As n increases, $n^{1.01}$ grows at a
+.  super-linear rate, and $\log^2 n$ grows at a sub-linear rate
 
   - 1d. Is $n^{1.01} \in \Omega(\mathrm{log}^2 n)$?  
 .  
-.  
-.  
+.  No, because $n^{1.01} grows much faster than $\log^2 n$ for 
+.  large values of n. $n^{1.01} grows at a super-linear rate
+.  while $\log^2 n$ grows at a sub-linear rate.
 .  
   - 1e. Is $\sqrt{n} \in O((\mathrm{log} n)^3)$?  
 .  
-.  
-.  
+.  No, because $\sqrt{n} grows much faster than $(\log n)^3$ for
+.  large values of n, and since sqrt(n) grows at a linear rate
+   and $(\log n)^3 grows at a sub-linear rate, $\sqrt{n}
+   cannot be in $(\log n)^3$
 .  
   - 1f. Is $\sqrt{n} \in \Omega((\mathrm{log} n)^3)$?  
-.  
+
+   No, because $\sqrt{n} grows much faster than {log} n^3 for large
+   values of n, and since $\sqrt{n} grows at a linear rate and 
+   {log} n^3 grows at a sublinear rate, $\sqrt{n} cannot
+   be in {log} n^3
 
 
 2. **SPARC to Python** (12 pts)
@@ -61,7 +68,9 @@ $$
   - 2a. (6 pts) Translate this to Python code -- fill in the `def foo` method in `main.py`  
 
   - 2b. (6 pts) What does this function do, in your own words?  
-
+    This function first checks that x is less than or equal to 0, and if it is it returns x. Otherwise, it gives ra and rb
+    values by replacing ra with foo(x-1) and rb with foo(x-2). It then returns the sum of the 2 numbers. Since the fibonnaci sequence
+    is made by adding the 2 previous numbers to make the next number, this function does the same thing.
 .  
 .  
 .  
