@@ -13,10 +13,20 @@ def foo(x):
     pass
 
 def longest_run(mylist, key):
-    ### TODO
-    pass
+  a = 0
+  top = 0
 
+  for i in range(len(mylist)):
+    if(key == mylist[i]) & (mylist[i] == mylist[i-1]):
+      a += 1
+      continue
+    if(a > top):
+      top = a
+      a = 1
 
+  return a
+
+  
 class Result:
     """ done """
     def __init__(self, left_size, right_size, longest_size, is_entire_range):
@@ -31,8 +41,49 @@ class Result:
     
     
 def longest_run_recursive(mylist, key):
-    ### TODO
-    pass
+  a = len(mylist)
+  if a == 0:
+    return Result(0, 0, 0, False)
+
+  if a == 1:
+    if mylist[0] == key:
+      return Result(1, 1, 1, True)
+    else:
+      return Result(0, 0, 0, False)
+
+  l = longest_run_recursive(mylist[:len(mylist)//2], key)
+  r = longest_run_recursive(mylist[len(mylist)//2:], key)
+  
+  if l.is_entire_range and r.is_entire_range:
+    return Result(l.left_size + l.right_size, r.left_size + r.right_size, (l.longest_size + r.longest_size), True)
+
+  elif l.is_entire_range:
+    if (r.left_size + l.longest_size) <= l.longest_size:
+      return Result(l.left_size + r.left_size, r.right_size,  l.longest_size, False)
+    else:
+      return Result(l.left_size + r.left_size, r.right_size, (r.left_size + l.longest_size), False)
+
+  elif r.is_entire_range:
+    if (l.right_size + r.longest_size) <= r.longest_size:
+      return Result(l.left_size, r.right_size + l.right_size, r.longest_size, False)
+    else:
+      return Result(l.left_size, r.right_size + l.right_size, (l.right_size + r.longest_size), False)
+
+  else:
+    if (l.right_size + r.left_size) < r.longest_size:
+      return Result(l.left_size, r.right_size, r.longest_size, False)
+    elif (l.right_size + r.left_size) < l.longest_size:
+      return Result(l.left_size, r.right_size, l.longest_size, False)
+    else:
+      return Result(l.left_size, r.right_size, (l.right_size + r.left_size), False)
+                                 
+
+## Feel free to add your own tests here.
+def test_longest_run():
+    assert longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3
+                                 
+def test_longest_run_recursive():
+    assert longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 12).longest_size == 3
 
 ## Feel free to add your own tests here.
 def test_longest_run():
